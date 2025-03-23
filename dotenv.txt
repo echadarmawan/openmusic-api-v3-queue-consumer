@@ -1,0 +1,17 @@
+nama file asli: .env
+
+# node-postgres configuration
+PGUSER=<ganti dengan nama user>
+PGHOST=<kalo masih tahap development biasanya localhost>
+PGPASSWORD=<ganti dengan pass user>
+PGDATABASE=<ganti dengan nama database>
+PGPORT=<port default 5432>
+
+# nodemailer SMTTP authentication
+SMTP_HOST=<??>
+SMTP_PORT=2525
+SMTP_USER=<??>
+SMTP_PASSWORD=<??>
+
+# Message broker
+RABBITMQ_SERVER=amqp://<host>
