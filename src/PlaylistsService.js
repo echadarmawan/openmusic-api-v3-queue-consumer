@@ -7,7 +7,7 @@ class PlaylistsService {
 
   async getSongs(playlistId) {
     const query = {
-      text: `SELECT p.id, p.name, u.username,
+      text: `SELECT p.id, p.name,
       s.id AS song_id, s.title AS song_title, s.performer AS song_performer FROM playlists p
       JOIN users u ON p.owner = u.id
       JOIN playlist_songs ps ON p.id = ps.playlist_id
@@ -26,7 +26,6 @@ class PlaylistsService {
     const playlist = {
       id: result.rows[0].id,
       name: result.rows[0].name,
-      username: result.rows[0].username,
       songs: result.rows.map((row) => ({
         id: row.song_id,
         title: row.song_title,

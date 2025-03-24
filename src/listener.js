@@ -12,7 +12,15 @@ class Listener {
       
       // memanggil lagu-lagu dalam suatu playlist dan sendEmail
       const playlist = await this._playlistsService.getSongs(playlistId);
-      const result = await this._mailSender.sendEmail(targetEmail, JSON.stringify(playlist));
+
+      // jika playlist tidak ditemukan, kirimkan pesan kesalahan
+      if (!playlist) {
+        console.log('Playlist tidak ditemukan');
+        return;
+      }
+
+      // mengirimkan email dengan format JSON yang sesuai
+      const result = await this._mailSender.sendEmail(targetEmail, JSON.stringify({ playlist }));
       console.log(result);
     } catch (error) {
       console.error(error);
