@@ -5,6 +5,7 @@ const MailSender = require('./MailSender');
 const Listener = require('./listener');
  
 const init = async () => {
+  const PLAYLIST_EXPORT_QUEUE = 'export:playlist';
   const playlistsService = new PlaylistsService();
   const mailSender = new MailSender();
   const listener = new Listener(playlistsService, mailSender);
@@ -12,11 +13,11 @@ const init = async () => {
   const connection = await amqp.connect(process.env.RABBITMQ_SERVER);
   const channel = await connection.createChannel();
  
-  await channel.assertQueue('export:playlist', {
+  await channel.assertQueue(PLAYLIST_EXPORT_QUEUE, {
     durable: true,
   });
  
-  channel.consume('export:playlist', listener.listen, { noAck: true });
+  channel.consume(PLAYLIST_EXPORT_QUEUE, listener.listen, { noAck: true });
 };
  
 init();
